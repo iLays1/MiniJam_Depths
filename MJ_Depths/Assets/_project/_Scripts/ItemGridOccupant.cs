@@ -10,7 +10,7 @@ public class ItemGridOccupant : GridOccupant
     public override void Awake()
     {
         base.Awake();
-        rend.sprite = itemData.art;
+        rend.sprite = itemData.sprite;
     }
 
     public void PickUp(Player player)
