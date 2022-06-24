@@ -19,7 +19,7 @@ public class GridManager : Singleton<GridManager>
         newSet.Add(occupant);
         occupantDictionary.Add(occupant.gridPos, newSet);
     }
-    public static void RemovePosFromDictionary(GridOccupant occupant)
+    public static void RemoveOccupantFromDictionary(GridOccupant occupant)
     {
         occupantDictionary.TryGetValue(occupant.gridPos, out var set);
 

@@ -20,7 +20,7 @@ public class GridOccupant : MonoBehaviour
     {
         transform.DOKill();
         transform.DOMove((Vector2)targetPosition, 0.1f);
-        GridManager.RemovePosFromDictionary(this);
+        GridManager.RemoveOccupantFromDictionary(this);
         gridPos = targetPosition;
         GridManager.AddPosToDictionary(this);
     }

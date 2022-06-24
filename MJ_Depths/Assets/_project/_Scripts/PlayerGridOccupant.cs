@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerGridOccupant : GridOccupant
 {
     public GameObject pitPrefab;
+    public GameObject playerSprite;
     public ParticleSystem trailParticle;
     bool canmove = true;
 
@@ -18,7 +19,7 @@ public class PlayerGridOccupant : GridOccupant
     {
         if (!canmove) return;
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.G))
         {
             PlayNextRoomAnim();
         }
@@ -26,18 +27,22 @@ public class PlayerGridOccupant : GridOccupant
         if (Input.GetKeyDown(KeyCode.D))
         {
             MoveInDir(Vector2Int.right);
+            return;
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
             MoveInDir(Vector2Int.left);
+            return;
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
             MoveInDir(Vector2Int.up);
+            return;
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             MoveInDir(Vector2Int.down);
+            return;
         }
     }
 
@@ -64,7 +69,7 @@ public class PlayerGridOccupant : GridOccupant
             //Cant move into blocked tile
 
             transform.DOComplete();
-            transform.DOPunchPosition((Vector2)dir * 0.3f, 0.2f);
+            transform.DOPunchPosition((Vector2)dir * 0.6f, 0.25f);
             return;
         }
 
@@ -77,19 +82,23 @@ public class PlayerGridOccupant : GridOccupant
         canmove = false;
 
         Sequence s = DOTween.Sequence();
+        var pt = playerSprite.transform;
 
-        var oPos = transform.position;
+        var oPos = pt.position;
+        var oScale = pt.localScale;
 
-        s.Append(transform.DOMove(oPos + Vector3.up, 1.4f).SetEase(Ease.OutCubic));
-        s.Join(transform.DOLocalRotate(new Vector3(0,0,720), 1.5f, RotateMode.FastBeyond360));
+        s.Append(pt.DOMove(oPos + (Vector3.up*1.5f), 1.3f).SetEase(Ease.OutCubic));
+        s.Join(pt.DOLocalRotate(new Vector3(0,0,360), 1.4f, RotateMode.FastBeyond360));
+        s.Join(pt.DOScale(oScale * 1.2f, 1.3f));
 
-        s.AppendInterval(0.1f);
+        s.AppendInterval(0.15f);
 
-        s.Append(transform.DOMove(oPos, 0.05f));
+        s.Append(pt.DOMove(oPos, 0.06f));
+        s.Join(pt.DOScale(oScale * 0.7f, 0.08f));
         s.AppendCallback(() =>
         {
             var pit = Instantiate(pitPrefab);
-            pit.transform.position = transform.position;
+            pit.transform.position = transform.position + (Vector3.down*0.3f);
             Destroy(gameObject);
 
             trailParticle.transform.SetParent(null);
