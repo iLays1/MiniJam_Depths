@@ -15,6 +15,10 @@ public class FuelSlider : MonoBehaviour
     {
         player.OnValueChange.AddListener(UpdateUI);
     }
+    private void Start()
+    {
+        UpdateUI();
+    }
 
     void UpdateUI()
     {
