@@ -13,4 +13,9 @@ MonoBehaviour:
   m_Name: TestItemData
   m_EditorClassIdentifier: 
   itemName: Box
+  itemDesc: 'this is dummy text.
+
+    deal damage in a area
+
+    one time use'
   sprite: {fileID: 21300000, guid: 8ba501702f8d5bb4496a25f95a617882, type: 3}

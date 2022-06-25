@@ -52,5 +52,11 @@ public class GridManager : Singleton<GridManager>
         var gridPos = new Vector2Int(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y));
         return gridPos;
     }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        occupantDictionary.Clear();
+    }
 }
 

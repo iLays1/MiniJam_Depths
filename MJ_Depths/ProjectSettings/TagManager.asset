@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: World
+    uniqueID: 2496270341
+    locked: 0
+  - name: VFX
+    uniqueID: 196290317
+    locked: 0
+  - name: UI
+    uniqueID: 2280951207
+    locked: 0

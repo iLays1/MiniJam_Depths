@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class ItemUISlot : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public static UnityEvent OnSlotHoverEnter = new UnityEvent();
+    public static UnityEvent OnSlotHoverExit = new UnityEvent();
+
     public static ItemUISlot hoveredSlot;
 
     public ItemUIContainer currentContainer;
@@ -13,9 +17,10 @@ public class ItemUISlot : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
     public ItemData data = null;
     public Image spriteImage;
     public Sprite blankSprite;
+
     Camera cam;
     bool dragging = false;
-
+    
     private void Awake()
     {
         cam = Camera.main;
@@ -65,19 +70,22 @@ public class ItemUISlot : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
         {
             return;
         }
-
+        
         var newData = hoveredSlot.data;
         hoveredSlot.LoadData(data);
         LoadData(newData);
+        GameEvents.OnItemMoved.Invoke();
     }
     
     public void OnPointerEnter(PointerEventData eventData)
     {
         hoveredSlot = this;
+        OnSlotHoverEnter.Invoke();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         hoveredSlot = null;
+        OnSlotHoverExit.Invoke();
     }
 }

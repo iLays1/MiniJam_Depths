@@ -5,14 +5,24 @@ using UnityEngine;
 
 public class PlayerGridOccupant : GridOccupant
 {
-    public GameObject pitPrefab;
-    public GameObject playerSprite;
-    public ParticleSystem trailParticle;
+    public SpriteRenderer playerSprite;
+    public int moveCost = 1;
+
     bool canmove = true;
 
+    [Space, Header("VFXs")]
+    public GameObject pitPrefab;
+    public GameObject deathParticlePrefab;
+    public ParticleSystem trailParticle;
+    
     public override void Awake()
     {
         base.Awake();
+        Player.Instance.OnValueChange.AddListener(() =>
+        {
+            if (Player.Instance.fuel <= 0)
+                PlayDeathAnim();
+        });
     }
 
     void Update()
@@ -20,17 +30,19 @@ public class PlayerGridOccupant : GridOccupant
         if (!canmove) return;
 
         if (Input.GetKeyDown(KeyCode.G))
-        {
             PlayNextRoomAnim();
-        }
+        if (Input.GetKeyDown(KeyCode.H))
+            PlayDeathAnim();
 
         if (Input.GetKeyDown(KeyCode.D))
         {
+            playerSprite.flipX = true;
             MoveInDir(Vector2Int.right);
             return;
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
+            playerSprite.flipX = false;
             MoveInDir(Vector2Int.left);
             return;
         }
@@ -46,8 +58,10 @@ public class PlayerGridOccupant : GridOccupant
         }
     }
 
-    public void MoveInDir(Vector2Int dir)
+    public override void MoveInDir(Vector2Int dir)
     {
+        if (!Player.Instance.EnoughFuel(moveCost)) return;
+
         var finalPos = gridPos + dir;
         var set = GridManager.GetPositionSet(finalPos);
         bool blocked = false;
@@ -56,7 +70,7 @@ public class PlayerGridOccupant : GridOccupant
         {
             foreach (var o in set)
             {
-                if(o.blocksTile)
+                if (o.blocksTile)
                 {
                     blocked = true;
                     break;
@@ -64,32 +78,33 @@ public class PlayerGridOccupant : GridOccupant
             }
         }
 
-        if(blocked)
+        if (blocked)
         {
             //Cant move into blocked tile
-
             transform.DOComplete();
-            transform.DOPunchPosition((Vector2)dir * 0.6f, 0.25f);
+            transform.DOPunchPosition((Vector2)dir * 0.2f, 0.25f);
             return;
         }
 
         SetPositionInGrid(finalPos);
+
+        Player.Instance.SpendFuel(moveCost);
         GameEvents.OnPlayerMove.Invoke();
     }
 
     public void PlayNextRoomAnim()
     {
         canmove = false;
+        GameEvents.OnLevelEnd.Invoke();
 
         Sequence s = DOTween.Sequence();
         var pt = playerSprite.transform;
-
         var oPos = pt.position;
         var oScale = pt.localScale;
 
-        s.Append(pt.DOMove(oPos + (Vector3.up*1.5f), 1.3f).SetEase(Ease.OutCubic));
-        s.Join(pt.DOLocalRotate(new Vector3(0,0,360), 1.4f, RotateMode.FastBeyond360));
-        s.Join(pt.DOScale(oScale * 1.2f, 1.3f));
+        s.Append(pt.DOMove(oPos + (Vector3.up*1.5f), 1f).SetEase(Ease.OutCubic));
+        s.Join(pt.DOLocalRotate(new Vector3(0,0,360), 0.6f, RotateMode.FastBeyond360));
+        s.Join(pt.DOScale(oScale * 1.2f, 1f));
 
         s.AppendInterval(0.15f);
 
@@ -103,6 +118,36 @@ public class PlayerGridOccupant : GridOccupant
 
             trailParticle.transform.SetParent(null);
             trailParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        });
+    }
+
+    public void PlayDeathAnim()
+    {
+        canmove = false;
+        GameEvents.OnLevelEnd.Invoke();
+
+        Sequence s = DOTween.Sequence();
+        var pt = playerSprite.transform;
+        var oPos = pt.position;
+        var oScale = pt.localScale;
+
+        pt.DOKill();
+        transform.DOKill();
+
+        s.Append(pt.DOLocalMove((Vector3.down * 0.03f), 0.7f));
+        s.Join(pt.DOScale(oScale + (Vector3.down * 0.3f), 0.7f));
+        s.Join(transform.DOPunchPosition(Vector3.left * 0.2f, 0.7f));
+
+        s.AppendInterval(0.2f);
+
+        s.Append(pt.DOMove(oPos + (Vector3.up*0.3f), 0.04f));
+        s.Join(pt.DOScale((oScale * 1.5f), 0.06f));
+        
+        s.AppendCallback(() =>
+        {
+            var dp = Instantiate(deathParticlePrefab);
+            dp.transform.position = transform.position;
+            Destroy(gameObject);
         });
     }
 }
