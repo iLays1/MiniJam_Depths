@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6c5bb5f44af72d43ab1de3e9fe88b96, type: 3}
-  m_Name: Sword
+  m_Script: {fileID: 11500000, guid: a445f3d6cf2ed8f4cbe8fbee4ada7beb, type: 3}
+  m_Name: GainFuel
   m_EditorClassIdentifier: 
-  damage: 1
-  range: 1
-  gunSound: 0
+  fuelGainAmount: 15

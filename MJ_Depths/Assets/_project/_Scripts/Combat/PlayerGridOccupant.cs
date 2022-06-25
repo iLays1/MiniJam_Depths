@@ -90,7 +90,8 @@ public class PlayerGridOccupant : GridOccupant
         }
 
         SetPositionInGrid(finalPos);
-
+        
+        AudioManager.Instance.Play("Move");
         Player.Instance.SpendFuel(moveCost);
         GameEvents.OnPlayerMove.Invoke();
     }
@@ -155,6 +156,7 @@ public class PlayerGridOccupant : GridOccupant
 
             cam.DOShakePosition(0.4f, 0.5f, 40);
 
+            AudioManager.Instance.Play("PDeath");
             Destroy(gameObject);
         });
     }

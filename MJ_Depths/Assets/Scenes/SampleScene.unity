@@ -469,6 +469,86 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6536288305292631773, guid: 725e68b6b7fb5f94c9a75ae6c4575331, type: 3}
   m_PrefabInstance: {fileID: 79179283}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &85821098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 85821100}
+  - component: {fileID: 85821099}
+  m_Layer: 0
+  m_Name: AudioSysten
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &85821099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85821098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3399d024b8d4f24982baf2451b69518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: EDeath
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 340c8b84ec136b9468f33dd8b32bbefe, type: 3}
+    volume: 0.5
+  - name: EOnAttack
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: ac50a2a22f883d340b28223c182ce091, type: 3}
+    volume: 0.4
+  - name: EOnHit
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 1d197185457215d4f91813d9adb09b4e, type: 3}
+    volume: 0.3
+  - name: PItemUsed
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 90411489e660aff49b2d8ba5e48f9f55, type: 3}
+    volume: 0.4
+  - name: PDeath
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 01334c52a5554bc418eefc66430d0b50, type: 3}
+    volume: 0.4
+  - name: POnHit
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 0c6ea727ff399194e95482b035e50251, type: 3}
+    volume: 0.4
+  - name: GunShot
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 46e1a3783c702704a9c034800fba43f7, type: 3}
+    volume: 0.4
+  - name: MeleeSwing
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9fc46687c4b255c42a099aedf25c7f2d, type: 3}
+    volume: 0.1
+  - name: Move
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 5716dc15b4844ed4eab5ad24f431dde9, type: 3}
+    volume: 0.3
+--- !u!4 &85821100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85821098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &123266255
 GameObject:
   m_ObjectHideFlags: 0

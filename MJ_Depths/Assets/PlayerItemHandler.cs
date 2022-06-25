@@ -28,7 +28,15 @@ public class PlayerItemHandler : MonoBehaviour
             Player.Instance.SpendFuel(handSlot.data.cost);
 
             if(handSlot.data.effect != null)
+            {
                 handSlot.data.effect.Use(player, pos);
+
+                if(handSlot.data.oneTimeUse)
+                {
+                    handSlot.LoadData(null);
+                    UpdateTargetIcons();
+                }
+            }
         }
     }
 

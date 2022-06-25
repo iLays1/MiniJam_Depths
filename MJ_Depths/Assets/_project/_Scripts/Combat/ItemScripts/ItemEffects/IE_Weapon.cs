@@ -9,6 +9,8 @@ public class IE_Weapon : ItemEffect
     public int damage;
     public int range;
 
+    public bool gunSound = false;
+
     public override void Use(PlayerGridOccupant player, Vector2Int targetGridPos)
     {
         var set = GridManager.GetPositionSet(targetGridPos);
@@ -18,7 +20,11 @@ public class IE_Weapon : ItemEffect
 
         player.transform.DOComplete();
         player.transform.DOPunchPosition(dir * 0.6f, 0.2f, 0, 0).SetEase(Ease.InBack);
-        
+
+        player.playerSprite.flipX = (dir.x < 0) ? false : true;
+
+        AudioManager.Instance.Play((gunSound) ? "GunShot": "MeleeSwing");
+
         if (set != null)
         {
             foreach (var o in set)

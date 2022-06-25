@@ -29,6 +29,8 @@ public class EnemyGridOccupant : GridOccupant, IDamageTaker
 
         cam.DOShakePosition(0.2f, 0.1f, 30);
 
+        AudioManager.Instance.Play("EOnHit");
+
         if (hp <= 0)
         {
             hp = 0;
@@ -40,6 +42,8 @@ public class EnemyGridOccupant : GridOccupant, IDamageTaker
     {
         var dp = Instantiate(deathParticlePrefab);
         dp.transform.position = transform.position;
+
+        AudioManager.Instance.Play("EDeath");
 
         Invoke("DestroySelf", 0.02f);
     }

@@ -59,6 +59,7 @@ public class GridOccupant : MonoBehaviour
             return;
         }
 
+        AudioManager.Instance.Play("Move");
         SetPositionInGrid(finalPos);
     }
 }

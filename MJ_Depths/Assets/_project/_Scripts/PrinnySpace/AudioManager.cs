@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : SingletonPersistent<AudioManager>
 {
-    public static AudioManager instance;
-
     [System.Serializable]
     public class Sound
     {
@@ -18,18 +16,10 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] sounds;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if(instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
-        instance = this;
-
-        foreach(var s in sounds)
+        base.Awake();
+        foreach (var s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
@@ -42,4 +32,11 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.Play();
     }
+    public void PlayRandomPitch(string name, float min, float max)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.pitch = UnityEngine.Random.Range(min,max);
+        s.source.Play();
+    }
 }
+
