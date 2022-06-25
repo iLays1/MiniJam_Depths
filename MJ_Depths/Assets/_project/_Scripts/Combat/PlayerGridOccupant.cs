@@ -14,10 +14,13 @@ public class PlayerGridOccupant : GridOccupant
     public GameObject pitPrefab;
     public GameObject deathParticlePrefab;
     public ParticleSystem trailParticle;
+
+    Camera cam;
     
     public override void Awake()
     {
         base.Awake();
+        cam = Camera.main;
         Player.Instance.OnValueChange.AddListener(() =>
         {
             if (Player.Instance.fuel <= 0)
@@ -116,6 +119,8 @@ public class PlayerGridOccupant : GridOccupant
             pit.transform.position = transform.position + (Vector3.down*0.3f);
             Destroy(gameObject);
 
+            cam.DOShakePosition(0.4f, 0.5f, 30);
+
             trailParticle.transform.SetParent(null);
             trailParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         });
@@ -147,6 +152,9 @@ public class PlayerGridOccupant : GridOccupant
         {
             var dp = Instantiate(deathParticlePrefab);
             dp.transform.position = transform.position;
+
+            cam.DOShakePosition(0.4f, 0.5f, 40);
+
             Destroy(gameObject);
         });
     }

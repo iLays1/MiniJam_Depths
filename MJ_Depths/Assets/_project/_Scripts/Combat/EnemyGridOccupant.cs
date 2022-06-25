@@ -9,6 +9,14 @@ public class EnemyGridOccupant : GridOccupant, IDamageTaker
     public ParticleSystem hitParticle;
     public int hp;
 
+    Camera cam;
+
+    public override void Awake()
+    {
+        base.Awake();
+        cam = Camera.main;
+    }
+
     public void TakeDamage(int damage)
     {
         hp -= damage;
@@ -18,6 +26,8 @@ public class EnemyGridOccupant : GridOccupant, IDamageTaker
         transform.DOComplete();
         transform.DOPunchPosition(Vector3.left * 0.35f, 0.3f, 12);
         hitParticle.Play();
+
+        cam.DOShakePosition(0.2f, 0.1f, 30);
 
         if (hp <= 0)
         {
