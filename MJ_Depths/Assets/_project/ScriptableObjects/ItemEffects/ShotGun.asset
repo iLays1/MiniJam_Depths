@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6c5bb5f44af72d43ab1de3e9fe88b96, type: 3}
-  m_Name: Sword
+  m_Name: ShotGun
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 5
   range: 1
   gunSound: 1

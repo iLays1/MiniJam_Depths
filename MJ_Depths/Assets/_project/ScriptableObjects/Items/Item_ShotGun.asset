@@ -10,19 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5b1208f6688fb04d899c231a2839217, type: 3}
-  m_Name: Item_Sword
+  m_Name: Item_ShotGun
   m_EditorClassIdentifier: 
   itemName: Sword
-  itemDesc: 'A basic weapon
+  itemDesc: 'Weapon
 
-    2 Fuel
+    5 Fuel
 
     1 Range
 
-    1 Damage
-
-'
-  sprite: {fileID: 21300000, guid: 19e6156d944f586409599fdc45374c7e, type: 3}
-  oneTimeUse: 0
-  cost: 2
-  effect: {fileID: 11400000, guid: 35f26d6f76b9a4b4eafe4b78a7d70648, type: 2}
+    5 Damage'
+  sprite: {fileID: 21300000, guid: a016b0dc34d78c145acae9cec0b545d2, type: 3}
+  oneTimeUse: 1
+  cost: 5
+  effect: {fileID: 11400000, guid: 7a9f25f243e5da444a6d1b14323c3422, type: 2}
