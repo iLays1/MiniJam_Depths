@@ -36,6 +36,8 @@ public class PlayerItemHandler : MonoBehaviour
                     handSlot.LoadData(null);
                     UpdateTargetIcons();
                 }
+                
+                GameEvents.OnPlayerAct.Invoke();
             }
         }
     }

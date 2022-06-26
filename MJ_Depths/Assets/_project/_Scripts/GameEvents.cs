@@ -6,6 +6,7 @@ public static class GameEvents
     //Combat
     public static UnityEvent OnEndTurn = new UnityEvent();
     public static UnityEvent OnPlayerMove = new UnityEvent();
+    public static UnityEvent OnPlayerAct = new UnityEvent();
     public static UnityEvent OnItemMoved = new UnityEvent();
 
     public static UnityEvent OnLevelEnd = new UnityEvent();

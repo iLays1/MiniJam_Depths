@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5b1208f6688fb04d899c231a2839217, type: 3}
-  m_Name: Item_ShotGun
+  m_Name: Item_Rifle
   m_EditorClassIdentifier: 
-  itemName: Sword
+  itemName: Rifle
   itemDesc: 'Weapon
 
     5 Fuel
 
-    1 Range
+    3 Range
 
-    5 Damage'
-  sprite: {fileID: 21300000, guid: a016b0dc34d78c145acae9cec0b545d2, type: 3}
-  oneTimeUse: 1
+    3 Damage'
+  sprite: {fileID: 21300000, guid: f6d1713eb2c6ca74eb9c0d5bbaa2afd2, type: 3}
+  oneTimeUse: 0
   cost: 5
-  effect: {fileID: 11400000, guid: 7a9f25f243e5da444a6d1b14323c3422, type: 2}
+  effect: {fileID: 11400000, guid: a33e25384910c844db6a242b7d1e240d, type: 2}

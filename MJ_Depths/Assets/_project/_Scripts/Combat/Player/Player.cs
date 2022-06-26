@@ -17,6 +17,14 @@ public class Player : Singleton<Player>
         OnValueChange.Invoke();
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            GameEvents.OnPlayerAct.Invoke();
+        }
+    }
+
     public bool EnoughFuel(int cost)
     {
         if (cost > fuel)

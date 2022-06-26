@@ -37,24 +37,24 @@ public class PlayerGridOccupant : GridOccupant
         if (Input.GetKeyDown(KeyCode.H))
             PlayDeathAnim();
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             playerSprite.flipX = true;
             MoveInDir(Vector2Int.right);
             return;
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             playerSprite.flipX = false;
             MoveInDir(Vector2Int.left);
             return;
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             MoveInDir(Vector2Int.up);
             return;
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             MoveInDir(Vector2Int.down);
             return;
@@ -93,7 +93,9 @@ public class PlayerGridOccupant : GridOccupant
         
         AudioManager.Instance.Play("Move");
         Player.Instance.SpendFuel(moveCost);
+
         GameEvents.OnPlayerMove.Invoke();
+        GameEvents.OnPlayerAct.Invoke();
     }
 
     public void PlayNextRoomAnim()
