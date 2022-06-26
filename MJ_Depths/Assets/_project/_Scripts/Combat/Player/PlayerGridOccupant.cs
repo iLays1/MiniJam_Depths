@@ -36,8 +36,6 @@ public class PlayerGridOccupant : GridOccupant
 
         if (Input.GetKeyDown(KeyCode.G))
             PlayNextRoomAnim();
-        if (Input.GetKeyDown(KeyCode.H))
-            PlayDeathAnim();
 
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -140,6 +138,8 @@ public class PlayerGridOccupant : GridOccupant
             cam.DOShakePosition(0.4f, 0.5f, 30);
             trailParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
 
+            SceneSystem.Instance.LoadNextLevel(2f);
+
             DestroySelf();
         });
     }
@@ -148,6 +148,8 @@ public class PlayerGridOccupant : GridOccupant
     {
         canmove = false;
         GameEvents.OnLevelEnd.Invoke();
+
+        MusicSystem.Instance.PlaySong(Song.GameoverTheme);
 
         Sequence s = DOTween.Sequence();
         var pt = spriteRend.transform;

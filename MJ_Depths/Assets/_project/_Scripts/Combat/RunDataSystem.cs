@@ -6,12 +6,24 @@ public class RunDataSystem : SingletonPersistent<RunDataSystem>
 {
     public int startingFuel;
     public int remainingFuel;
+    public List<ItemData> startingItems = new List<ItemData>();
     public List<ItemData> items = new List<ItemData>();
 
     protected override void Awake()
     {
         base.Awake();
+        ResetData();
+    }
+
+    public void ResetData()
+    {
         remainingFuel = startingFuel;
+        items.Clear();
+        foreach(var i in startingItems)
+        {
+            items.Add(i);
+        }
+        SceneSystem.Instance.currentLevel = 0;
     }
 
     public void LoadData()

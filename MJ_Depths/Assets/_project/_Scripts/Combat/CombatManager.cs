@@ -5,18 +5,27 @@ using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
+    int enemyCount;
     private void Awake()
     {
         GameEvents.OnPlayerMove.AddListener(PlayerMoved);
+        MusicSystem.Instance.PlaySong(Song.BattleTheme);
+        GameEvents.OnEnemyDeath.AddListener(EnemyKilled);
     }
 
-    private void Update()
+    private void Start()
     {
-        if(Input.GetKeyDown(KeyCode.R))
+        enemyCount = FindObjectsOfType<EnemyGridOccupant>().Length;
+    }
+
+    void EnemyKilled()
+    {
+        enemyCount--;
+
+        if(enemyCount <= 0)
         {
-            DOTween.KillAll();
-            RunDataSystem.Instance.SaveData();
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+            GameEvents.OnLevelWin.Invoke();
+            MusicSystem.Instance.PlaySong(Song.BattleClearTheme);
         }
     }
 

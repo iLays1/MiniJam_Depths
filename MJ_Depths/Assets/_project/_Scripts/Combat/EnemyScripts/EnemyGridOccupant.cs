@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.Events;
 
 public class EnemyGridOccupant : GridOccupant, IDamageTaker
 {
@@ -49,6 +50,7 @@ public class EnemyGridOccupant : GridOccupant, IDamageTaker
 
         AudioSystem.Instance.Play("EDeath");
 
+        GameEvents.OnEnemyDeath.Invoke();
         Invoke("DestroySelf", 0.02f);
     }
     void DestroySelf()
