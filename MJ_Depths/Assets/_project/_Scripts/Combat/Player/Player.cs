@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Player : Singleton<Player>
 {
     public UnityEvent OnValueChange = new UnityEvent();
+    public ItemUIContainer inventory;
     public int fuel;
     public int maxFuel;
     
@@ -15,6 +16,8 @@ public class Player : Singleton<Player>
 
         fuel = maxFuel;
         OnValueChange.Invoke();
+
+        RunDataSystem.Instance.LoadData();
     }
 
     private void Update()
@@ -41,6 +44,7 @@ public class Player : Singleton<Player>
 
         OnValueChange.Invoke();
     }
+
     public void SpendFuel(int amount)
     {
         fuel -= amount;

@@ -15,6 +15,7 @@ public class CombatManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R))
         {
             DOTween.KillAll();
+            RunDataSystem.Instance.SaveData();
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         }
     }

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Rifle
   m_EditorClassIdentifier: 
   damage: 3
-  range: 3
+  minRange: 2
+  maxRange: 4
   gunSound: 1

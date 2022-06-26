@@ -59,7 +59,7 @@ public class GridOccupant : MonoBehaviour
             return;
         }
 
-        AudioManager.Instance.PlayRandomPitch("Move", 0.7f, 1f);
+        AudioSystem.Instance.PlayRandomPitch("Move", 0.7f, 1f);
         SetPositionInGrid(finalPos);
     }
 }

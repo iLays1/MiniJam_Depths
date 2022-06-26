@@ -19,10 +19,8 @@ MonoBehaviour:
 
     1 Range
 
-    1 Damage
-
-'
-  sprite: {fileID: 21300000, guid: 19e6156d944f586409599fdc45374c7e, type: 3}
+    2 Damage'
+  sprite: {fileID: 21300000, guid: 86232baff94da59488306753bf2f8596, type: 3}
   oneTimeUse: 0
   cost: 2
   effect: {fileID: 11400000, guid: 35f26d6f76b9a4b4eafe4b78a7d70648, type: 2}

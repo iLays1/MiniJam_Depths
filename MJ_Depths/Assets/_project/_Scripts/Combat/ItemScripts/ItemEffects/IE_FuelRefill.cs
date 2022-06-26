@@ -9,7 +9,7 @@ public class IE_FuelRefill : ItemEffect
 
     public override void Use(PlayerGridOccupant player, Vector2Int targetGridPos)
     {
-        AudioManager.Instance.Play("PItemUsed");
+        AudioSystem.Instance.Play("PItemUsed");
 
         Player.Instance.GainFuel(fuelGainAmount);
     }

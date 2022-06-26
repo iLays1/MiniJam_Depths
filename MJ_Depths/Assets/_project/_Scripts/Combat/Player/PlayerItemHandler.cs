@@ -60,7 +60,7 @@ public class PlayerItemHandler : MonoBehaviour
         if (handSlot.data != null && handSlot.data.effect is IE_Weapon)
         {
             var weapon = handSlot.data.effect as IE_Weapon;
-            var validTargets = GetTilesInRange(weapon.range);
+            var validTargets = GetTilesInRange(weapon.minRange, weapon.maxRange);
 
             int count = 0;
             foreach(var pos in validTargets)
@@ -77,12 +77,12 @@ public class PlayerItemHandler : MonoBehaviour
         }
     }
 
-    private List<Vector2Int> GetTilesInRange(int range)
+    private List<Vector2Int> GetTilesInRange(int minRange, int maxRange)
     {
         var square = new List<Vector2Int>();
-        for (int i = 0; i <= range; ++i)
+        for (int i = 0; i <= maxRange; ++i)
         {
-            for (int j = 0; j <= range; ++j)
+            for (int j = 0; j <= maxRange; ++j)
             {
                 if (i == 0 && j == 0) continue;
                 square.Add(new Vector2Int(player.gridPos.x + i, player.gridPos.y + j));
@@ -97,7 +97,8 @@ public class PlayerItemHandler : MonoBehaviour
         foreach (var pos in square)
         {
             var diff = player.gridPos - pos;
-            if (Mathf.Abs(diff.x) + Mathf.Abs(diff.y) <= range)
+            var dis = Mathf.Abs(diff.x) + Mathf.Abs(diff.y);
+            if (dis <= maxRange && dis >= minRange)
             {
                 finalTargets.Add(pos);
             }

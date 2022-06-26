@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Grenade
   m_EditorClassIdentifier: 
   damage: 8
-  range: 2
+  minRange: 1
+  maxRange: 2
   gunSound: 0

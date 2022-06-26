@@ -7,7 +7,8 @@ using UnityEngine;
 public class IE_Weapon : ItemEffect
 {
     public int damage;
-    public int range;
+    public int minRange;
+    public int maxRange;
 
     public bool gunSound = false;
 
@@ -21,9 +22,9 @@ public class IE_Weapon : ItemEffect
         player.transform.DOComplete();
         player.transform.DOPunchPosition(dir * 0.6f, 0.2f, 0, 0).SetEase(Ease.InBack);
 
-        player.playerSprite.flipX = (dir.x < 0) ? false : true;
+        player.spriteRend.flipX = (dir.x < 0) ? false : true;
 
-        AudioManager.Instance.Play((gunSound) ? "GunShot": "MeleeSwing");
+        AudioSystem.Instance.Play((gunSound) ? "GunShot": "MeleeSwing");
 
         if (set != null)
         {

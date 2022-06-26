@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlayerGridOccupant : GridOccupant
 {
-    public SpriteRenderer playerSprite;
+    public SpriteRenderer spriteRend;
+    public SpriteRenderer shadowSpriteRend;
     public int moveCost = 1;
 
     bool canmove = true;
@@ -14,6 +15,7 @@ public class PlayerGridOccupant : GridOccupant
     public GameObject pitPrefab;
     public GameObject deathParticlePrefab;
     public ParticleSystem trailParticle;
+    public ParticleSystem hitParticle;
 
     Camera cam;
     
@@ -39,13 +41,13 @@ public class PlayerGridOccupant : GridOccupant
 
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            playerSprite.flipX = true;
+            spriteRend.flipX = true;
             MoveInDir(Vector2Int.right);
             return;
         }
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            playerSprite.flipX = false;
+            spriteRend.flipX = false;
             MoveInDir(Vector2Int.left);
             return;
         }
@@ -60,7 +62,21 @@ public class PlayerGridOccupant : GridOccupant
             return;
         }
     }
+    
+    public void TakeDamage(int damage)
+    {
+        Player.Instance.SpendFuel(damage);
 
+        TextPopup.Create($"-{damage.ToString()}", Color.yellow, transform.position);
+
+        transform.DOComplete();
+        transform.DOPunchPosition(Vector3.left * 0.35f, 0.3f, 12);
+        hitParticle.Play();
+
+        cam.DOShakePosition(0.2f, 0.1f, 30);
+
+        AudioSystem.Instance.Play("POnHit");
+    }
     public override void MoveInDir(Vector2Int dir)
     {
         if (!Player.Instance.EnoughFuel(moveCost)) return;
@@ -91,7 +107,7 @@ public class PlayerGridOccupant : GridOccupant
 
         SetPositionInGrid(finalPos);
         
-        AudioManager.Instance.Play("Move");
+        AudioSystem.Instance.Play("Move");
         Player.Instance.SpendFuel(moveCost);
 
         GameEvents.OnPlayerMove.Invoke();
@@ -104,7 +120,7 @@ public class PlayerGridOccupant : GridOccupant
         GameEvents.OnLevelEnd.Invoke();
 
         Sequence s = DOTween.Sequence();
-        var pt = playerSprite.transform;
+        var pt = spriteRend.transform;
         var oPos = pt.position;
         var oScale = pt.localScale;
 
@@ -120,12 +136,11 @@ public class PlayerGridOccupant : GridOccupant
         {
             var pit = Instantiate(pitPrefab);
             pit.transform.position = transform.position + (Vector3.down*0.3f);
-            Destroy(gameObject);
 
             cam.DOShakePosition(0.4f, 0.5f, 30);
-
-            trailParticle.transform.SetParent(null);
             trailParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+
+            DestroySelf();
         });
     }
 
@@ -135,7 +150,7 @@ public class PlayerGridOccupant : GridOccupant
         GameEvents.OnLevelEnd.Invoke();
 
         Sequence s = DOTween.Sequence();
-        var pt = playerSprite.transform;
+        var pt = spriteRend.transform;
         var oPos = pt.position;
         var oScale = pt.localScale;
 
@@ -157,9 +172,17 @@ public class PlayerGridOccupant : GridOccupant
             dp.transform.position = transform.position;
 
             cam.DOShakePosition(0.4f, 0.5f, 40);
+            trailParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
 
-            AudioManager.Instance.Play("PDeath");
-            Destroy(gameObject);
+            AudioSystem.Instance.Play("PDeath");
+            DestroySelf();
         });
+    }
+
+    void DestroySelf()
+    {
+        Destroy(this);
+        Destroy(spriteRend.gameObject);
+        Destroy(shadowSpriteRend.gameObject);
     }
 }

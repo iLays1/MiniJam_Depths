@@ -18,7 +18,7 @@ MonoBehaviour:
     Gain 15 Fuel
 
 '
-  sprite: {fileID: 21300000, guid: 8ba501702f8d5bb4496a25f95a617882, type: 3}
+  sprite: {fileID: 21300000, guid: 4116d70f99856814e95a032b0811748a, type: 3}
   oneTimeUse: 1
   cost: 0
   effect: {fileID: 11400000, guid: 786a827397c24384e9cd3a31d1417f09, type: 2}

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : SingletonPersistent<AudioManager>
+public class AudioSystem : SingletonPersistent<AudioSystem>
 {
     [System.Serializable]
     public class Sound

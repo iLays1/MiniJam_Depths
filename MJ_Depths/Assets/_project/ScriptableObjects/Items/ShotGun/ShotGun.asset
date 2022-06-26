@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ShotGun
   m_EditorClassIdentifier: 
   damage: 5
-  range: 1
+  minRange: 1
+  maxRange: 2
   gunSound: 1
