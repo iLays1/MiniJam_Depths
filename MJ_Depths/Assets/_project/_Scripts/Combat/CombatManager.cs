@@ -25,6 +25,7 @@ public class CombatManager : MonoBehaviour
         if(enemyCount <= 0)
         {
             GameEvents.OnLevelWin.Invoke();
+            AudioSystem.Instance.Play("Victory");
             MusicSystem.Instance.PlaySong(Song.BattleClearTheme);
         }
     }

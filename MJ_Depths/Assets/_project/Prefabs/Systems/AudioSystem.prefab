@@ -47,7 +47,7 @@ MonoBehaviour:
   - name: EDeath
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 340c8b84ec136b9468f33dd8b32bbefe, type: 3}
-    volume: 0.5
+    volume: 0.4
   - name: EOnAttack
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: ac50a2a22f883d340b28223c182ce091, type: 3}
@@ -55,28 +55,32 @@ MonoBehaviour:
   - name: EOnHit
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 1d197185457215d4f91813d9adb09b4e, type: 3}
-    volume: 0.3
+    volume: 0.4
   - name: PItemUsed
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 90411489e660aff49b2d8ba5e48f9f55, type: 3}
-    volume: 0.4
+    volume: 0.5
   - name: PDeath
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 01334c52a5554bc418eefc66430d0b50, type: 3}
-    volume: 0.4
+    volume: 0.5
   - name: POnHit
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 0c6ea727ff399194e95482b035e50251, type: 3}
-    volume: 0.4
+    volume: 0.5
   - name: GunShot
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 46e1a3783c702704a9c034800fba43f7, type: 3}
-    volume: 0.4
+    volume: 0.5
   - name: MeleeSwing
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 9fc46687c4b255c42a099aedf25c7f2d, type: 3}
-    volume: 0.1
+    volume: 0.2
   - name: Move
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 5716dc15b4844ed4eab5ad24f431dde9, type: 3}
-    volume: 0.3
+    volume: 0.4
+  - name: Fuse
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8877fc4f85aa3084996a90860ef07513, type: 3}
+    volume: 0.5

@@ -138,6 +138,7 @@ public class PlayerGridOccupant : GridOccupant
             cam.DOShakePosition(0.4f, 0.5f, 30);
             trailParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
 
+            AudioSystem.Instance.Play("BreakRock");
             SceneSystem.Instance.LoadNextLevel(2f);
 
             DestroySelf();
@@ -149,6 +150,7 @@ public class PlayerGridOccupant : GridOccupant
         canmove = false;
         GameEvents.OnLevelEnd.Invoke();
 
+        AudioSystem.Instance.Play("Fuse");
         MusicSystem.Instance.PlaySong(Song.GameoverTheme);
 
         Sequence s = DOTween.Sequence();
@@ -176,6 +178,7 @@ public class PlayerGridOccupant : GridOccupant
             cam.DOShakePosition(0.4f, 0.5f, 40);
             trailParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
 
+            AudioSystem.Instance.Stop("Fuse");
             AudioSystem.Instance.Play("PDeath");
             DestroySelf();
         });
